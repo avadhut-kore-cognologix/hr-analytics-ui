@@ -1,0 +1,54 @@
+<div>
+  <div class="submit-form">
+    <div class="form-group">
+      <label for="userType">User Type</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userType"
+        required
+        [(ngModel)]="downloadForm.userType"
+        name="userType"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="corporateEmail">Corporate Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="corporateEmail"
+        required
+        [(ngModel)]="downloadForm.corporateEmail"
+        name="corporateEmail"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input
+        type="text"
+        class="form-control"
+        id="startDate"
+        required
+        [(ngModel)]="downloadForm.startDate"
+        name="startDate"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input
+        type="text"
+        class="form-control"
+        id="endDate"
+        required
+        [(ngModel)]="downloadForm.endDate"
+        name="endDate"
+      />
+    </div>
+
+    <button (click)="reset()" class="btn btn-primary">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button (click)="initiateReportProcessing()" class="btn btn-danger">Submit</button>
+  </div>
+</div>

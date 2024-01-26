@@ -1,0 +1,34 @@
+<div>
+  <div class="submit-form">
+    @if (!submitted) {
+    <div class="form-group">
+      <label for="requestId">Request ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="requestId"
+        required
+        [(ngModel)]="downloadForm.requestId"
+        name="requestId"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="corporateEmail">Corporate Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="corporateEmail"
+        required
+        [(ngModel)]="downloadForm.corporateEmail"
+        name="corporateEmail"
+      />
+    </div>
+
+    <button (click)="downloadReport()" class="btn btn-success">Submit</button>
+    } @else {
+    <h4>Report was submitted successfully!</h4>
+    <button class="btn btn-success" (click)="getReport()">Get Report</button>
+    }
+  </div>
+</div>
