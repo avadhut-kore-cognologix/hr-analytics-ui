@@ -3,4 +3,7 @@ export class InitiateReportProcessingRequest {
   corporateEmail?: string;
   startDate?: string;
   endDate?: string;
+  gmailAvailabilityMessagesFile?: File;
+  zohoLeavesFile?: File;
+  zohoProfilesFile?: File;
 }

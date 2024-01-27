@@ -8,11 +8,15 @@ import { InitiateReportProcessingRequest } from '../../models/initiate-report-pr
   styleUrls: ['./initiate-report-processing.component.css'],
 })
 export class InitiateReportProcessingComponent {
+  currentFile?: File;
   downloadForm: InitiateReportProcessingRequest = {
     userType: '',
     corporateEmail: '',
     startDate: '',
-    endDate: ''
+    endDate: '',
+    gmailAvailabilityMessagesFile: undefined,
+    zohoLeavesFile: undefined,
+    zohoProfilesFile: undefined,
   };
   submitted = false;
 
@@ -44,8 +48,23 @@ export class InitiateReportProcessingComponent {
       userType: '',
       corporateEmail: '',
       startDate: '',
-      endDate: ''
+      endDate: '',
+      gmailAvailabilityMessagesFile: undefined
     };
+  }
+
+  selectGmailAvailabilityMessagesFile(event: any): void {
+    if (event.target.files && event.target.files.length > 0) {
+      this.downloadForm.gmailAvailabilityMessagesFile = event.target.files[0] as File;
+    }
+  }
+
+  selectZohoProfilesFile(event: any): void {
+    this.downloadForm.zohoProfilesFile = event.target.files.item(0);
+  }
+
+  selectZohoLeavesFile(event: any): void {
+    this.downloadForm.zohoLeavesFile = event.target.files.item(0);
   }
   
 }

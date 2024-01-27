@@ -2,14 +2,16 @@
   <div class="submit-form">
     <div class="form-group">
       <label for="userType">User Type</label>
-      <input
-        type="text"
+      <select
         class="form-control"
         id="userType"
         required
         [(ngModel)]="downloadForm.userType"
         name="userType"
-      />
+      >
+        <option value="Internal">Internal</option>
+        <option value="External">External</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -27,7 +29,7 @@
     <div class="form-group">
       <label for="startDate">Start Date</label>
       <input
-        type="text"
+        type="date"
         class="form-control"
         id="startDate"
         required
@@ -39,12 +41,51 @@
     <div class="form-group">
       <label for="endDate">End Date</label>
       <input
-        type="text"
+        type="date"
         class="form-control"
         id="endDate"
         required
         [(ngModel)]="downloadForm.endDate"
         name="endDate"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="gmailAvailabilityMessagesFile">Gmail Availability Messages</label>
+      <input
+        type="file"
+        class="form-control"
+        (change)="selectGmailAvailabilityMessagesFile($event)"
+        id="gmailAvailabilityMessagesFile"
+        required
+        [(ngModel)]="downloadForm.gmailAvailabilityMessagesFile"
+        name="gmailAvailabilityMessagesFile"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="zohoProfilesFile">Zoho Profiles File</label>
+      <input
+        type="file"
+        class="form-control"
+        (change)="selectZohoProfilesFile($event)"
+        id="zohoProfilesFile"
+        required
+        [(ngModel)]="downloadForm.zohoProfilesFile"
+        name="zohoProfilesFile"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="zohoLeavesFile">Zoho Leaves File</label>
+      <input
+        type="file"
+        class="form-control"
+        (change)="selectZohoLeavesFile($event)"
+        id="zohoLeavesFile"
+        required
+        [(ngModel)]="downloadForm.zohoLeavesFile"
+        name="zohoLeavesFile"
       />
     </div>
 
