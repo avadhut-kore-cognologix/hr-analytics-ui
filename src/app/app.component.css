@@ -1,0 +1,7 @@
+.navbar-profile {
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    border-radius: 39px;
+    background: url('/assets/images/profile.png'), lightgray 50% / cover no-repeat;
+}
