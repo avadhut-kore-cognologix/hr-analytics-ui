@@ -22,13 +22,14 @@ export class DownloadReportComponent {
       corporateEmail: this.downloadForm.corporateEmail
     };
 
-    this.downloadService.create(data).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.submitted = true;
-      },
-      error: (e) => console.error(e)
-    });
+    // this.downloadService.create(data).subscribe({
+    //   next: (res) => {
+    //     console.log(res);
+    //     this.submitted = true;
+    //   },
+    //   error: (e) => console.error(e)
+    // });
+    this.submitted = true;
   }
 
   getReport(): void {

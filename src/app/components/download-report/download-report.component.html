@@ -1,34 +1,43 @@
 <div>
-  <div class="submit-form">
-    @if (!submitted) {
-    <div class="form-group">
-      <label for="requestId">Request ID</label>
-      <input
-        type="text"
-        class="form-control"
-        id="requestId"
-        required
-        [(ngModel)]="downloadForm.requestId"
-        name="requestId"
-      />
-    </div>
 
-    <div class="form-group">
-      <label for="corporateEmail">Corporate Email</label>
-      <input
-        type="text"
-        class="form-control"
-        id="corporateEmail"
-        required
-        [(ngModel)]="downloadForm.corporateEmail"
-        name="corporateEmail"
-      />
-    </div>
+  @if (!submitted) {
+  <div class="submit-form row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="requestId">Request ID</label>
+        <input type="text" class="form-control" id="requestId" required [(ngModel)]="downloadForm.requestId"
+          name="requestId" />
+      </div>
 
-    <button (click)="downloadReport()" class="btn btn-success">Submit</button>
-    } @else {
-    <h4>Report was submitted successfully!</h4>
-    <button class="btn btn-success" (click)="getReport()">Get Report</button>
-    }
+      <div class="form-group">
+        <label for="corporateEmail">Corporate Email</label>
+        <input type="text" class="form-control" id="corporateEmail" required [(ngModel)]="downloadForm.corporateEmail"
+          name="corporateEmail" />
+      </div>
+
+      <button (click)="downloadReport()" class="btn btn-success">Submit</button>
+    </div>
+    <div class="col-sm">
+      <div id="download-report-image">
+
+      </div>
+    </div>
   </div>
+  } @else {
+  <div class="row">
+    <div class="col-sm">
+      <div id="download-report-image">
+
+      </div>
+    </div>
+    <div class="col-sm">
+      <div id="download-success">
+        <h4>Report was submitted successfully!</h4>
+      </div>
+      <h4>Report was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="getReport()">Get Report</button>
+    </div>
+  </div>
+  }
+
 </div>

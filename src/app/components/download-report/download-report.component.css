@@ -1,4 +1,14 @@
 .submit-form {
-  max-width: 400px;
+  max-width: 700px;
   margin: auto;
+}
+
+#download-report-image {
+  width: 328px;
+  height: 341px;  
+  background-image: url('/assets/images/download-report-image.png'); /* The image used */
+  background-color: lightgray; /* Used if the image is unavailable */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }
