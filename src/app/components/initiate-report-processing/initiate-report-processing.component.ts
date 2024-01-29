@@ -20,26 +20,18 @@ export class InitiateReportProcessingComponent {
   };
   submitted = false;
 
-  constructor(private downloadService: DownloadService) {}
+  constructor(private downloadService: DownloadService) { }
 
   initiateReportProcessing(): void {
-    const data = {
-      userType: this.downloadForm.userType,
-      corporateEmail: this.downloadForm.corporateEmail,
-      startDate: this.downloadForm.startDate,
-      endDate: this.downloadForm.endDate
-    };
-
-    console.log(data);
     this.submitted = true;
 
-    // this.downloadService.create(data).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //     this.submitted = true;
-    //   },
-    //   error: (e) => console.error(e)
-    // });
+    this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.submitted = true;
+      },
+      error: (e) => console.error(e)
+    });
   }
 
   reset(): void {
@@ -66,5 +58,4 @@ export class InitiateReportProcessingComponent {
   selectZohoLeavesFile(event: any): void {
     this.downloadForm.zohoLeavesFile = event.target.files.item(0);
   }
-  
 }

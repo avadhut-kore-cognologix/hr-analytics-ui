@@ -5,10 +5,29 @@
 
 #download-report-image {
   width: 328px;
-  height: 341px;  
-  background-image: url('/assets/images/download-report-image.png'); /* The image used */
-  background-color: lightgray; /* Used if the image is unavailable */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  height: 341px;
+  background-image: url('/assets/images/download-report-image.png');
+  /* The image used */
+  background-color: lightgray;
+  /* Used if the image is unavailable */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: cover;
+  /* Resize the background image to cover the entire container */
+}
+
+#download-success {
+  width: 307px;
+  height: 274px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px dashed #3C9F46;
+  background: #E6FBE8;
+}
+
+.download-icon {
+  width: 80px;
+  height: 80px;
 }

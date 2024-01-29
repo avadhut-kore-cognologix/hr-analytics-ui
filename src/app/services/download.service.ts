@@ -1,41 +1,78 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DownloadRequest } from '../models/download-request.model';
+import { InitiateReportProcessingRequest } from '../models/initiate-report-processing-request.model';
 
-const baseUrl = 'http://localhost:8080/api/tutorials';
+const baseUrl = 'http://hranalytics.cognologix.in:8000/v1/async/hr-analytics';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DownloadService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getAll(): Observable<DownloadRequest[]> {
-    return this.http.get<DownloadRequest[]>(baseUrl);
+  downloadReport(request: DownloadRequest): Observable<any> {
+    var endpoint: string = 'get-report/?';
+    if (request.requestId) {
+      endpoint += `request_id=${request.requestId}&`;
+    }
+
+    if (request.corporateEmail) {
+      endpoint += `corporate_email=${request.corporateEmail}&`;
+    }
+
+    const req = new HttpRequest('GET', `${baseUrl}/${endpoint}`, {
+      responseType: 'json'
+    });
+
+    return this.http.request(req);
   }
 
-  get(id: any): Observable<DownloadRequest> {
-    return this.http.get<DownloadRequest>(`${baseUrl}/${id}`);
-  }
+  initiateReportProcessing(request: InitiateReportProcessingRequest): Observable<any> {
 
-  create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
-  }
+    var date = new Date();
+    if (!request.startDate) {
+      var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+      request.startDate = firstDay.toISOString().slice(0, 10);
+    }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
-  }
+    if (!request.endDate) {
+      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      request.endDate = lastDay.toISOString().slice(0, 10);
+    }
 
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
-  }
+    var endpoint: string = 'report-generation/?';
+    if (request.userType) {
+      endpoint += `user_type=${request.userType}&`;
+    }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
+    if (request.corporateEmail) {
+      endpoint += `corporate_email=${request.corporateEmail}&`;
+    }
 
-  findByTitle(title: any): Observable<DownloadRequest[]> {
-    return this.http.get<DownloadRequest[]>(`${baseUrl}?title=${title}`);
+    if (request.startDate) {
+      endpoint += `start_date=${request.startDate}&`;
+    }
+
+    if (request.endDate) {
+      endpoint += `end_date=${request.endDate}&`;
+    }
+
+    const formData: FormData = new FormData();
+    if (request.gmailAvailabilityMessagesFile)
+      formData.append("gmail_availability_json", request.gmailAvailabilityMessagesFile);
+
+    if (request.zohoLeavesFile)
+      formData.append("zoho_leave_csv", request.zohoLeavesFile);
+
+    if (request.zohoProfilesFile)
+      formData.append("zoho_employee_profile_csv", request.zohoProfilesFile);
+
+    const req = new HttpRequest('POST', `${baseUrl}/${endpoint}`, formData, {
+      responseType: 'json'
+    });
+
+    return this.http.request(req);
   }
 }

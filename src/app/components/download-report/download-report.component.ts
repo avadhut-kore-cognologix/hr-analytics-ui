@@ -14,21 +14,16 @@ export class DownloadReportComponent {
   };
   submitted = false;
 
-  constructor(private downloadService: DownloadService) {}
+  constructor(private downloadService: DownloadService) { }
 
   downloadReport(): void {
-    const data = {
-      requestId: this.downloadForm.requestId,
-      corporateEmail: this.downloadForm.corporateEmail
-    };
-
-    // this.downloadService.create(data).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //     this.submitted = true;
-    //   },
-    //   error: (e) => console.error(e)
-    // });
+    this.downloadService.downloadReport(this.downloadForm).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.submitted = true;
+      },
+      error: (e) => console.error(e)
+    });
     this.submitted = true;
   }
 
