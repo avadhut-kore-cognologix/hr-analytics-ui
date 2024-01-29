@@ -6,7 +6,8 @@ import { DownloadReportComponent } from './components/download-report/download-r
 const routes: Routes = [
   { path: '', redirectTo: 'initiate-report-processing', pathMatch: 'full' },
   { path: 'initiate-report-processing', component: InitiateReportProcessingComponent },
-  { path: 'download-report', component: DownloadReportComponent }
+  { path: 'download-report', component: DownloadReportComponent },
+  { path: 'download-report/:requestId', component: DownloadReportComponent }
 ];
 
 @NgModule({

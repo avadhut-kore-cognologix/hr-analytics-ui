@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { DownloadService } from '../../services/download.service';
 import { InitiateReportProcessingRequest } from '../../models/initiate-report-processing-request.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-initiate-report-processing',
@@ -20,24 +21,27 @@ export class InitiateReportProcessingComponent {
     zohoLeavesFile: undefined,
     zohoProfilesFile: undefined,
   };
-  submitted = false;
+  dialogRef?: MatDialogRef<LoadingModalComponent>;
 
-  constructor(private downloadService: DownloadService, public dialog: MatDialog) { }
+  constructor(private downloadService: DownloadService, public dialog: MatDialog, private router: Router) { }
 
   initiateReportProcessing(): void {
-    this.submitted = true;
-    // this.openDialog();
+    this.openDialog();
     this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
       next: (res) => {
-        console.log(res);
-        this.submitted = true;
+        if (res?.body?.requestId) {
+          this.router.navigate(['/download-report', res.body.requestId]);
+          this.closeDialog();
+        }
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.closeDialog();
+      }
     });
   }
 
   reset(): void {
-    this.submitted = false;
     this.downloadForm = {
       userType: '',
       corporateEmail: '',
@@ -62,10 +66,12 @@ export class InitiateReportProcessingComponent {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(LoadingModalComponent);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    this.dialogRef = this.dialog.open(LoadingModalComponent, dialogConfig);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  closeDialog() {
+    this.dialogRef?.close();
   }
 }

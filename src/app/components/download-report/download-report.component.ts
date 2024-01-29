@@ -1,27 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DownloadRequest } from '../../models/download-request.model';
 import { DownloadService } from '../../services/download.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
 import saveAs from 'file-saver';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-download-report',
   templateUrl: './download-report.component.html',
   styleUrls: ['./download-report.component.css'],
 })
-export class DownloadReportComponent {
+export class DownloadReportComponent implements OnInit {
   downloadForm: DownloadRequest = {
     requestId: '',
     corporateEmail: ''
   };
   submitted = false;
   downloaded = false;
+  dialogRef?: MatDialogRef<LoadingModalComponent>;
 
-  constructor(private downloadService: DownloadService, public dialog: MatDialog) { }
+  constructor(private downloadService: DownloadService, public dialog: MatDialog, private route: ActivatedRoute) { }
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      if (params['requestId']) {
+        this.downloadForm.requestId = params['requestId'];
+        this.submitted = true;
+      }
+    });
+  }
 
   submitDownloadReportRequest(): void {
-    this.submitted = true;
     this.openDialog();
   }
 
@@ -52,10 +61,13 @@ export class DownloadReportComponent {
   }
 
   openDialog() {
+    const timeout = 3000;
     const dialogRef = this.dialog.open(LoadingModalComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+         dialogRef.close();
+         this.submitted = true;
+      }, timeout)
+    })
   }
 }
