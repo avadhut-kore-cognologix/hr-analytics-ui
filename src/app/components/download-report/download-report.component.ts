@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DownloadRequest } from '../../models/download-request.model';
 import { DownloadService } from '../../services/download.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
 
 @Component({
   selector: 'app-download-report',
@@ -13,25 +15,31 @@ export class DownloadReportComponent {
     corporateEmail: ''
   };
   submitted = false;
+  downloaded = false;
 
-  constructor(private downloadService: DownloadService) { }
+  constructor(private downloadService: DownloadService, public dialog: MatDialog) { }
 
-  downloadReport(): void {
-    this.downloadService.downloadReport(this.downloadForm).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.submitted = true;
-      },
-      error: (e) => console.error(e)
-    });
+  submitDownloadReportRequest(): void {
     this.submitted = true;
+    this.openDialog();
   }
 
   getReport(): void {
-    this.submitted = false;
-    this.downloadForm = {
-      requestId: '',
-      corporateEmail: ''
-    };
+    this.downloaded = true;
+    this.downloadService.downloadReport(this.downloadForm).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.downloaded = true;
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(LoadingModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

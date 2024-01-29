@@ -18,7 +18,7 @@
   /* Resize the background image to cover the entire container */
 }
 
-#download-success {
+#download-box {
   width: 307px;
   height: 274px;
   flex-shrink: 0;

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DownloadService } from '../../services/download.service';
 import { InitiateReportProcessingRequest } from '../../models/initiate-report-processing-request.model';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
 
 @Component({
   selector: 'app-initiate-report-processing',
@@ -20,11 +22,11 @@ export class InitiateReportProcessingComponent {
   };
   submitted = false;
 
-  constructor(private downloadService: DownloadService) { }
+  constructor(private downloadService: DownloadService, public dialog: MatDialog) { }
 
   initiateReportProcessing(): void {
     this.submitted = true;
-
+    this.openDialog();
     this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
       next: (res) => {
         console.log(res);
@@ -57,5 +59,13 @@ export class InitiateReportProcessingComponent {
 
   selectZohoLeavesFile(event: any): void {
     this.downloadForm.zohoLeavesFile = event.target.files.item(0);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(LoadingModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
