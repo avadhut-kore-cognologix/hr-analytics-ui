@@ -22,25 +22,14 @@ export class DownloadService {
       endpoint += `corporate_email=${request.corporateEmail}&`;
     }
 
-    const req = new HttpRequest('GET', `${baseUrl}/${endpoint}`, {
-      responseType: 'json'
-    });
-
-    return this.http.request(req);
+    return this.http.get<Blob>(`${baseUrl}/${endpoint}`, { observe: 'response', responseType: 'blob' as 'json' });
   }
 
   initiateReportProcessing(request: InitiateReportProcessingRequest): Observable<any> {
 
     var date = new Date();
-    if (!request.startDate) {
-      var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      request.startDate = firstDay.toISOString().slice(0, 10);
-    }
-
-    if (!request.endDate) {
-      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      request.endDate = lastDay.toISOString().slice(0, 10);
-    }
+    var startDate = request.startDate ?? new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 10);
+    var endDate = request.endDate ?? new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 10);
 
     var endpoint: string = 'report-generation/?';
     if (request.userType) {
@@ -51,13 +40,8 @@ export class DownloadService {
       endpoint += `corporate_email=${request.corporateEmail}&`;
     }
 
-    if (request.startDate) {
-      endpoint += `start_date=${request.startDate}&`;
-    }
-
-    if (request.endDate) {
-      endpoint += `end_date=${request.endDate}&`;
-    }
+    endpoint += `start_date=${startDate}&`;
+    endpoint += `end_date=${endDate}&`;
 
     const formData: FormData = new FormData();
     if (request.gmailAvailabilityMessagesFile)

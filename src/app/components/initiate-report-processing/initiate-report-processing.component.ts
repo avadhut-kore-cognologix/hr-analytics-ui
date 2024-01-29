@@ -26,7 +26,7 @@ export class InitiateReportProcessingComponent {
 
   initiateReportProcessing(): void {
     this.submitted = true;
-    this.openDialog();
+    // this.openDialog();
     this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
       next: (res) => {
         console.log(res);
