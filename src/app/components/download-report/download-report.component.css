@@ -21,13 +21,36 @@
 #download-box {
   width: 307px;
   height: 274px;
-  flex-shrink: 0;
   border-radius: 6px;
   border: 1px dashed #3C9F46;
   background: #E6FBE8;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.center-icon {
+  top: 35%;
 }
 
 .download-icon {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
+}
+
+.downloaded-message {
+  color: #3C9F46;
+  font-family: Montserrat;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: capitalize;
 }

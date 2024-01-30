@@ -32,11 +32,19 @@
     </div>
     <div class="col-sm">
       <div id="download-box">
+
         @if (downloaded) {
+        <div class="center center-icon">
           <img class="download-icon" src="assets/images/download-icon.svg" />
-          <h4>File Successfully Downloaded</h4>
+        </div>
+        <div class="center">
+          <p class="downloaded-message">File Successfully Downloaded</p>
+        </div>
         } @else {
-          <button class="btn btn-success" (click)="getReport()">Get Report</button>
+        <div class="center">
+          <button class="btn btn-success" (click)="getReport()">Get Report | <img
+              src="assets/icons/download.svg"></button>
+        </div>
         }
       </div>
     </div>
