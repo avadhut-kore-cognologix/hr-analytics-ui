@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
 export class InitiateReportProcessingComponent {
   currentFile?: File;
   downloadForm: InitiateReportProcessingRequest = {
-    userType: '',
-    corporateEmail: '',
-    startDate: '',
-    endDate: '',
+    userType: undefined,
+    corporateEmail: undefined,
+    startDate: undefined,
+    endDate: undefined,
+    period: undefined,
     gmailAvailabilityMessagesFile: undefined,
     zohoLeavesFile: undefined,
     zohoProfilesFile: undefined,

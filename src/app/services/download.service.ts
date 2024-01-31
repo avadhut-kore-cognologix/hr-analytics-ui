@@ -26,11 +26,7 @@ export class DownloadService {
   }
 
   initiateReportProcessing(request: InitiateReportProcessingRequest): Observable<any> {
-
-    var date = new Date();
-    var startDate = request.startDate ?? new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 10);
-    var endDate = request.endDate ?? new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 10);
-
+    var startDate = '', endDate = '';
     var endpoint: string = 'report-generation/?';
     if (request.userType) {
       endpoint += `user_type=${request.userType}&`;
@@ -38,6 +34,34 @@ export class DownloadService {
 
     if (request.corporateEmail) {
       endpoint += `corporate_email=${request.corporateEmail}&`;
+    }
+
+    var date = new Date();
+
+    if (request.period) {
+      switch (request.period) {
+        case "1":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+          startDate = sDate.toISOString().slice(0, 10);
+          endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "3":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 3, date.getDate());
+          startDate = sDate.toISOString().slice(0, 10);
+          endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "6":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 6, date.getDate());
+          startDate = sDate.toISOString().slice(0, 10);
+          endDate = date.toISOString().slice(0, 10);
+          break;
+      }
+    }
+    else {
+      startDate = request.startDate ?? new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 10);
+      endDate = request.endDate ?? new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 10);
     }
 
     endpoint += `start_date=${startDate}&`;

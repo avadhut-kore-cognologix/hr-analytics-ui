@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +26,8 @@ import { LoadingModalComponent } from './components/loading-modal/loading-modal.
     FormsModule,
     HttpClientModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
