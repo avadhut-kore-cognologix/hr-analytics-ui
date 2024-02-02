@@ -4,6 +4,7 @@ import { InitiateReportProcessingRequest } from '../../models/initiate-report-pr
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
 import { Router } from '@angular/router';
+import { DownloadGmailFileComponent } from '../download-gmail-file/download-gmail-file.component';
 
 @Component({
   selector: 'app-initiate-report-processing',
@@ -12,34 +13,71 @@ import { Router } from '@angular/router';
 })
 export class InitiateReportProcessingComponent {
   currentFile?: File;
+  period?: string;
   downloadForm: InitiateReportProcessingRequest = {
     userType: undefined,
     corporateEmail: undefined,
     startDate: undefined,
     endDate: undefined,
-    period: undefined,
     gmailAvailabilityMessagesFile: undefined,
     zohoLeavesFile: undefined,
     zohoProfilesFile: undefined,
   };
-  dialogRef?: MatDialogRef<LoadingModalComponent>;
+  loadingModalDialogRef?: MatDialogRef<LoadingModalComponent>;
+  downloadGmailFileModalDialogRef?: MatDialogRef<DownloadGmailFileComponent>;
 
   constructor(private downloadService: DownloadService, public dialog: MatDialog, private router: Router) { }
 
   initiateReportProcessing(): void {
-    this.openDialog();
+    this.openLoadingModal();
     this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
       next: (res) => {
         if (res?.body?.requestId) {
           this.router.navigate(['/download-report', res.body.requestId]);
-          this.closeDialog();
+          this.closeLoadingModal();
         }
       },
       error: (e) => {
         console.error(e);
-        this.closeDialog();
+        this.closeLoadingModal();
       }
     });
+  }
+
+  setDates(): void {
+    var date = new Date();
+
+    if (this.period) {
+      switch (this.period) {
+        case "0":          
+          this.downloadForm.startDate = '';
+          this.downloadForm.endDate = '';
+          break;
+
+        case "1":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
+          this.downloadForm.endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "3":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 3, date.getDate());
+          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
+          this.downloadForm.endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "6":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 6, date.getDate());
+          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
+          this.downloadForm.endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "12":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 12, date.getDate());
+          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
+          this.downloadForm.endDate = date.toISOString().slice(0, 10);
+      }
+    }
   }
 
   reset(): void {
@@ -66,13 +104,21 @@ export class InitiateReportProcessingComponent {
     this.downloadForm.zohoLeavesFile = event.target.files.item(0);
   }
 
-  openDialog() {
+  openLoadingModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    this.dialogRef = this.dialog.open(LoadingModalComponent, dialogConfig);
+    this.loadingModalDialogRef = this.dialog.open(LoadingModalComponent, dialogConfig);
   }
 
-  closeDialog() {
-    this.dialogRef?.close();
+  closeLoadingModal() {
+    this.loadingModalDialogRef?.close();
+  }
+
+  openDownloadGmailFileModal() {
+    this.downloadGmailFileModalDialogRef = this.dialog.open(DownloadGmailFileComponent);
+  }
+
+  closeDownloadGmailFileModal() {
+    this.downloadGmailFileModalDialogRef?.close();
   }
 }

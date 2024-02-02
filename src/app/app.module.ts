@@ -12,13 +12,15 @@ import { AppComponent } from './app.component';
 import { DownloadReportComponent } from './components/download-report/download-report.component';
 import { InitiateReportProcessingComponent } from './components/initiate-report-processing/initiate-report-processing.component';
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
+import { DownloadGmailFileComponent } from './components/download-gmail-file/download-gmail-file.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DownloadReportComponent,
     InitiateReportProcessingComponent,
-    LoadingModalComponent
+    LoadingModalComponent,
+    DownloadGmailFileComponent
   ],
   imports: [
     BrowserModule,

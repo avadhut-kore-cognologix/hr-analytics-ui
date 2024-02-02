@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Download Gmail Availability File</h2>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" required [(ngModel)]="downloadForm.username"
+      name="username" />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" required [(ngModel)]="downloadForm.password"
+      name="password" />
+  </div>
+
+  <button (click)="submitDownloadGmailFileRequest()" class="btn btn-success">Submit</button>
+</div>
