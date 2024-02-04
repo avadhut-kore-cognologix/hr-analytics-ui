@@ -16,9 +16,49 @@ export class DownloadGmailFileComponent implements OnInit {
     password: ''
   };
   dialogRef?: MatDialogRef<LoadingModalComponent>;
+  period?: string;
+  startDate?: string;
+  endDate?: string;
 
   constructor(private downloadService: DownloadService, public dialog: MatDialog) { }
   ngOnInit(): void {
+  }
+
+
+  setDates(): void {
+    var date = new Date();
+
+    if (this.period) {
+      switch (this.period) {
+        case "0":
+          this.startDate = '';
+          this.endDate = '';
+          break;
+
+        case "1":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+          this.startDate = sDate.toISOString().slice(0, 10);
+          this.endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "3":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 3, date.getDate());
+          this.startDate = sDate.toISOString().slice(0, 10);
+          this.endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "6":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 6, date.getDate());
+          this.startDate = sDate.toISOString().slice(0, 10);
+          this.endDate = date.toISOString().slice(0, 10);
+          break;
+
+        case "12":
+          var sDate = new Date(date.getFullYear(), date.getMonth() - 12, date.getDate());
+          this.startDate = sDate.toISOString().slice(0, 10);
+          this.endDate = date.toISOString().slice(0, 10);
+      }
+    }
   }
 
   submitDownloadGmailFileRequest(): void {

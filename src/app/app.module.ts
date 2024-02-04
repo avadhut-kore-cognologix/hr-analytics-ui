@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +31,7 @@ import { DownloadGmailFileComponent } from './components/download-gmail-file/dow
     MatDialogModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

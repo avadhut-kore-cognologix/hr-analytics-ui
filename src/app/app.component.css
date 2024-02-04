@@ -8,5 +8,17 @@
 
 .active {
     border-radius: 10px;
-    background: #3C9F46;
+    background: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: black !important;
+    font-weight: bold;
+    border-bottom: 5px solid green;
+}
+
+.container-fluid {
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
 }
