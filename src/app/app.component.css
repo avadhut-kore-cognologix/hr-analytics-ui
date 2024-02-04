@@ -22,3 +22,7 @@
     -moz-box-shadow: 0 4px 6px -6px #222;
     box-shadow: 0 4px 6px -6px #222;
 }
+
+.mt-3 {
+    box-shadow: 5px 5px 5px 5px lightgray;
+}

@@ -70,4 +70,13 @@ export class DownloadReportComponent implements OnInit {
       }, timeout)
     })
   }
+
+  reset(): void {
+    this.submitted = false;
+    this.downloaded = false;
+    this.downloadForm = {
+      requestId: '',
+      corporateEmail: ''
+    };
+  }
 }
