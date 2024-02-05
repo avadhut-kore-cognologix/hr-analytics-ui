@@ -1,24 +1,48 @@
 <div class="container">
+
   <div class="form-group">
-    <mat-radio-group id="period" aria-label="Select an option" [(ngModel)]="period"
+    <mat-radio-group id="period" aria-label="Select an option" [(ngModel)]="rangeType"
       [ngModelOptions]="{standalone: true}" (change)="setDates()">
-      <mat-radio-button value="0">Date</mat-radio-button>
-      <mat-radio-button value="1">1 Month</mat-radio-button>
-      <mat-radio-button value="3">3 Months</mat-radio-button>
-      <mat-radio-button value="6">6 Months</mat-radio-button>
-      <mat-radio-button value="12">Year</mat-radio-button>
+      <mat-radio-button value="by_date">Date</mat-radio-button>
+      <mat-radio-button value="one_month">1 Month</mat-radio-button>
+      <mat-radio-button value="three_months">3 Months</mat-radio-button>
+      <mat-radio-button value="six_months">6 Months</mat-radio-button>
+      <mat-radio-button value="one_year">Year</mat-radio-button>
     </mat-radio-group>
   </div>
 
-  <div class="form-group">
-    <label for="startDate">Start Date</label>
-    <input type="date" class="form-control" id="startDate" required [(ngModel)]="startDate" name="startDate" />
+  <div *ngIf="showDateSelection; else showMonthAndYearSelection">
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="date" class="form-control" id="startDate" required [(ngModel)]="startDate"
+        name="startDate" />
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" class="form-control" id="endDate" required [(ngModel)]="endDate" name="endDate" />
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="endDate">End Date</label>
-    <input type="date" class="form-control" id="endDate" required [(ngModel)]="endDate" name="endDate" />
-  </div>
+  <ng-template #showMonthAndYearSelection>
+    <div class="form-group">
+      <label for="year">Select Year</label>
+      <select class="form-control" id="year" required [(ngModel)]="year" name="year">
+        @for (year of years; track year) {
+        <option [value]="year">{{year}}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="month">From Month</label>
+      <select class="form-control" id="month" required [(ngModel)]="month" name="month">
+        @for (month of months; track month) {
+        <option [value]="month">{{month}}</option>
+        }
+      </select>
+    </div>
+  </ng-template>
 
   <button (click)="submitDownloadGmailFileRequest()" class="btn btn-success">Download</button>
 </div>
