@@ -13,7 +13,7 @@ import { DownloadGmailFileComponent } from '../download-gmail-file/download-gmai
 })
 export class InitiateReportProcessingComponent {
   currentFile?: File;
-  period?: string;
+  showDateSelection: boolean = true;
   downloadForm: InitiateReportProcessingRequest = {
     userType: undefined,
     corporateEmail: undefined,
@@ -22,7 +22,30 @@ export class InitiateReportProcessingComponent {
     gmailAvailabilityMessagesFile: undefined,
     zohoLeavesFile: undefined,
     zohoProfilesFile: undefined,
+    rangeType: 'by_date'
   };
+  months: string[] = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  years: string[] = [
+    "2022",
+    "2023",
+    "2024",
+    "2025"
+  ];
+
   loadingModalDialogRef?: MatDialogRef<LoadingModalComponent>;
   downloadGmailFileModalDialogRef?: MatDialogRef<DownloadGmailFileComponent>;
 
@@ -45,38 +68,11 @@ export class InitiateReportProcessingComponent {
   }
 
   setDates(): void {
-    var date = new Date();
+    this.showDateSelection = this.downloadForm.rangeType === 'by_date';
 
-    if (this.period) {
-      switch (this.period) {
-        case "0":          
-          this.downloadForm.startDate = '';
-          this.downloadForm.endDate = '';
-          break;
-
-        case "1":
-          var sDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
-          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
-          this.downloadForm.endDate = date.toISOString().slice(0, 10);
-          break;
-
-        case "3":
-          var sDate = new Date(date.getFullYear(), date.getMonth() - 3, date.getDate());
-          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
-          this.downloadForm.endDate = date.toISOString().slice(0, 10);
-          break;
-
-        case "6":
-          var sDate = new Date(date.getFullYear(), date.getMonth() - 6, date.getDate());
-          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
-          this.downloadForm.endDate = date.toISOString().slice(0, 10);
-          break;
-
-        case "12":
-          var sDate = new Date(date.getFullYear(), date.getMonth() - 12, date.getDate());
-          this.downloadForm.startDate = sDate.toISOString().slice(0, 10);
-          this.downloadForm.endDate = date.toISOString().slice(0, 10);
-      }
+    if (this.showDateSelection) {
+      this.downloadForm.startDate = '';
+      this.downloadForm.endDate = '';
     }
   }
 

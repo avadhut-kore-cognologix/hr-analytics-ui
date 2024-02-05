@@ -6,6 +6,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +33,9 @@ import { DownloadGmailFileComponent } from './components/download-gmail-file/dow
     MatDialogModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

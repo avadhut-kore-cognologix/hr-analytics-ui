@@ -5,7 +5,7 @@ import { DownloadRequest } from '../models/download-request.model';
 import { InitiateReportProcessingRequest } from '../models/initiate-report-processing-request.model';
 import { DownloadGmailFile } from '../models/download-gmail-file.model';
 
-const baseUrl = 'http://hranalytics.cognologix.in:8000/v1/async/hr-analytics';
+const baseUrl = 'http://hranalytics.cognologix.in:8000/v2/async/hr-analytics';
 
 @Injectable({
   providedIn: 'root',
@@ -40,9 +40,6 @@ export class DownloadService {
   }
 
   initiateReportProcessing(request: InitiateReportProcessingRequest): Observable<any> {
-    var date = new Date();
-    var startDate = request.startDate ?? new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 10);
-    var endDate = request.endDate ?? new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 10);
     var endpoint: string = 'report-generation/?';
     if (request.userType) {
       endpoint += `user_type=${request.userType}&`;
@@ -52,8 +49,16 @@ export class DownloadService {
       endpoint += `corporate_email=${request.corporateEmail}&`;
     }
 
-    endpoint += `start_date=${startDate}&`;
-    endpoint += `end_date=${endDate}&`;
+    endpoint += `range_type=${request.rangeType}&`;
+
+    if (request.rangeType === 'by_date') {
+      endpoint += `start_date=${request.startDate}&`;
+      endpoint += `end_date=${request.endDate}&`;
+    }
+    else {
+      endpoint += `month_type=${request.month}&`;
+      endpoint += `year_type=${request.year}&`;
+    }
 
     const formData: FormData = new FormData();
     if (request.gmailAvailabilityMessagesFile)
