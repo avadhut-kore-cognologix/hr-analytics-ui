@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { DownloadRequest } from '../../models/download-request.model';
 import { DownloadService } from '../../services/download.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
 import saveAs from 'file-saver';
 import { ActivatedRoute, Params } from '@angular/router';
+
+export const COPY = 'Copy';
+export const COPIED = 'Copied';
 
 @Component({
   selector: 'app-download-report',
@@ -20,8 +24,10 @@ export class DownloadReportComponent implements OnInit {
   downloaded = false;
   dialogRef?: MatDialogRef<LoadingModalComponent>;
   jsonString: string = '';
+  btnCopyTxt = COPY;
 
-  constructor(private downloadService: DownloadService, public dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(private downloadService: DownloadService, public dialog: MatDialog, private route: ActivatedRoute,
+    private clipboard: Clipboard) { }
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       if (params['requestId']) {
@@ -73,6 +79,15 @@ export class DownloadReportComponent implements OnInit {
 
       }, timeout)
     })
+  }
+
+  copyToClipboard() {
+    this.clipboard.copy(JSON.stringify(this.data));
+    this.btnCopyTxt = COPIED;
+
+    setTimeout(() => {
+      this.btnCopyTxt = COPY;
+    }, 3000);
   }
 
   reset(): void {

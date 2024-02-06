@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -27,6 +28,7 @@ import { DownloadGmailFileComponent } from './components/download-gmail-file/dow
   ],
   imports: [
     BrowserModule,
+    ClipboardModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

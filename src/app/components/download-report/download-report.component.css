@@ -4,7 +4,7 @@
   padding-top: 30px;
 }
 
-.download-form {  
+.download-form {
   padding-top: 30px;
 }
 
@@ -35,6 +35,12 @@
   right: 0px;
   background: rgba(240, 87, 87, 0.1);
   border-radius: 4px;
+}
+
+.copy-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 #download-box {
