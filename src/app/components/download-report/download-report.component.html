@@ -1,4 +1,4 @@
-<div>
+<div class="download-report">
 
   @if (!submitted) {
   <div class="submit-form row">
@@ -25,10 +25,10 @@
     </div>
   </div>
   } @else {
-  <div class="row">
+  <div class="download-form row">
     <div class="col-sm">
-      <div id="download-report-image">
-
+      <div id="json-box">
+        {{ jsonString }}
       </div>
     </div>
     <div class="col-sm">

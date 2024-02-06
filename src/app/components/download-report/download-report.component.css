@@ -1,6 +1,15 @@
 .submit-form {
   max-width: 700px;
   margin: auto;
+  padding-top: 30px;
+}
+
+.download-form {  
+  padding-top: 30px;
+}
+
+.download-report {
+  height: 500px;
 }
 
 #download-report-image {
@@ -16,6 +25,16 @@
   /* Do not repeat the image */
   background-size: cover;
   /* Resize the background image to cover the entire container */
+}
+
+#json-box {
+  width: 406px;
+  height: 274px;
+  border: 1.5px solid #F05757;
+  position: absolute;
+  right: 0px;
+  background: rgba(240, 87, 87, 0.1);
+  border-radius: 4px;
 }
 
 #download-box {

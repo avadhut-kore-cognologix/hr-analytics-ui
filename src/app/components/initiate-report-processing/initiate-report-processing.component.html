@@ -66,49 +66,42 @@
       <div class="col-6">
         <label for="gmailAvailabilityMessagesFile">Gmail Availability Messages</label>
         <div class="row">
-          <div class="col-10">
-            <div class="form-group">
-              <input type="file" class="form-control" (change)="selectGmailAvailabilityMessagesFile($event)"
-                id="gmailAvailabilityMessagesFile" required [(ngModel)]="downloadForm.gmailAvailabilityMessagesFile"
-                name="gmailAvailabilityMessagesFile" />
-            </div>
-          </div>
-          <div class="col-2">
-            <button (click)="openDownloadGmailFileModal()" class="btn btn-success">Get Data</button>
-          </div>
-        </div>
-
-        <label for="zohoLeavesFile">Zoho Leaves File</label>
-        <div class="row">
-          <div class="col-10">
-            <div class="form-group">
-              <input type="file" class="form-control" (change)="selectZohoLeavesFile($event)" id="zohoLeavesFile"
-                required [(ngModel)]="downloadForm.zohoLeavesFile" name="zohoLeavesFile" />
-            </div>
-          </div>
-          <div class="col-2">
-            <button (click)="openDownloadGmailFileModal()" class="btn btn-success">Get Data</button>
-          </div>
-        </div>
-
-        <label for="zohoProfilesFile">Zoho Profiles File</label>
-        <div class="row">
-          <div class="col-10">
-            <div class="form-group">
-              <input type="file" class="form-control" (change)="selectZohoProfilesFile($event)" id="zohoProfilesFile"
-                required [(ngModel)]="downloadForm.zohoLeavesFile" name="zohoProfilesFile" />
-            </div>
-          </div>
-          <div class="col-2">
-            <button (click)="openDownloadGmailFileModal()" class="btn btn-success">Get Data</button>
+          <div class="form-group">
+            <input type="file" (change)="selectGmailAvailabilityMessagesFile($event)"
+              id="gmailAvailabilityMessagesFile" required [(ngModel)]="downloadForm.gmailAvailabilityMessagesFile"
+              name="gmailAvailabilityMessagesFile" />
+              <button (click)="openDownloadGmailFileModal()" class="btn btn-success">Get Data</button>
           </div>
         </div>
         <br />
+        <br />
+
+        <label for="zohoLeavesFile">Zoho Leaves File</label>
+        <div class="row">
+            <div class="form-group">
+              <input type="file" (change)="selectZohoLeavesFile($event)" id="zohoLeavesFile"
+                required [(ngModel)]="downloadForm.zohoLeavesFile" name="zohoLeavesFile" />
+                <button (click)="openDownloadGmailFileModal()" class="btn btn-success">Get Data</button>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <label for="zohoProfilesFile">Zoho Profiles File</label>
+        <div class="row">
+            <div class="form-group">
+              <input type="file" (change)="selectZohoProfilesFile($event)" id="zohoProfilesFile"
+                required [(ngModel)]="downloadForm.zohoLeavesFile" name="zohoProfilesFile" />
+                <button (click)="openDownloadGmailFileModal()" class="btn btn-success">Get Data</button>
+            </div>          
+        </div>
         <br />
         <br />
 
         <button (click)="reset()" class="btn btn-primary">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
         <button (click)="initiateReportProcessing()" class="btn btn-danger">Submit</button>
+        <br />
+        <br />
       </div>
     </div>
   </div>

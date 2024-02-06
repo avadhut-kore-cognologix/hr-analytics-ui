@@ -12,7 +12,11 @@
 
 .navbar-dark .navbar-nav .nav-link {
     color: black !important;
-    font-weight: bold;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
     border-bottom: 2px solid lightgray;
     margin-right: 5px;
 }
@@ -25,4 +29,15 @@
 
 .mt-3 {
     box-shadow: 5px 5px 5px 5px lightgray;
+}
+
+.app-title {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 37px;
+    text-align: center;
+
+    color: #000000;
 }

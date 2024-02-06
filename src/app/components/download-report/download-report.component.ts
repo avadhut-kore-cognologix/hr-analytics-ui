@@ -19,6 +19,7 @@ export class DownloadReportComponent implements OnInit {
   submitted = false;
   downloaded = false;
   dialogRef?: MatDialogRef<LoadingModalComponent>;
+  jsonString: string = '';
 
   constructor(private downloadService: DownloadService, public dialog: MatDialog, private route: ActivatedRoute) { }
   ngOnInit(): void {
@@ -67,6 +68,9 @@ export class DownloadReportComponent implements OnInit {
       setTimeout(() => {
          dialogRef.close();
          this.submitted = true;
+
+         this.jsonString = JSON.stringify(this.data, null, 2);
+
       }, timeout)
     })
   }
@@ -79,4 +83,24 @@ export class DownloadReportComponent implements OnInit {
       corporateEmail: ''
     };
   }
+
+  data = [
+    {
+      "name": "d1",
+      "days": [
+        "monday",
+        "wednesday",
+      ],
+      "options": {
+        "name": "o1",
+        "extras": [],
+        "temp": [
+          "12",
+          "25",
+          "12"
+        ]
+      }
+    }
+  ]
+
 }
