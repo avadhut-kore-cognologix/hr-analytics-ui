@@ -56,11 +56,19 @@ export class InitiateReportProcessingComponent {
     this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
       next: (res) => {
         if (res?.body?.requestId) {
+
+          setTimeout(() => {
+            console.log("Delayed for 30 second.");
+          }, 30000);
+
           this.router.navigate(['/download-report', res.body.requestId]);
           this.closeLoadingModal();
         }
       },
       error: (e) => {
+        var errorMessage = '';
+        errorMessage = e?.message ?? 'Error Occured';
+        alert(errorMessage);
         console.error(e);
         this.closeLoadingModal();
       }
