@@ -25,6 +25,7 @@ export class DownloadReportComponent implements OnInit {
   dialogRef?: MatDialogRef<LoadingModalComponent>;
   jsonString: string = '';
   btnCopyTxt = COPY;
+  data = {};
 
   constructor(private downloadService: DownloadService, public dialog: MatDialog, private route: ActivatedRoute,
     private clipboard: Clipboard) { }
@@ -45,6 +46,7 @@ export class DownloadReportComponent implements OnInit {
     this.downloaded = true;
     this.downloadService.downloadReport(this.downloadForm).subscribe({
       next: (res) => {
+        this.data = res;
         var fileName = "combined_report.csv";
         const contentDisposition = res.headers.get('Content-Disposition');
         if (contentDisposition) {
@@ -60,6 +62,7 @@ export class DownloadReportComponent implements OnInit {
         this.downloaded = true;
       },
       error: (e) => {
+        this.data = e;
         console.error(e);
         alert("Problem while downloading the file.\n" +
           "[" + e.status + "] " + e.statusText);
@@ -98,24 +101,5 @@ export class DownloadReportComponent implements OnInit {
       corporateEmail: ''
     };
   }
-
-  data = [
-    {
-      "name": "d1",
-      "days": [
-        "monday",
-        "wednesday",
-      ],
-      "options": {
-        "name": "o1",
-        "extras": [],
-        "temp": [
-          "12",
-          "25",
-          "12"
-        ]
-      }
-    }
-  ]
 
 }

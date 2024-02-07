@@ -27,9 +27,7 @@
   } @else {
   <div class="download-form row">
     <div class="col-sm">
-      <pre id="json-box">
-        {{ data | json  }}
-      </pre>
+      <pre id="json-box">{{data | json}}</pre>
       <button class="copy-button" (click)="copyToClipboard()">{{ btnCopyTxt }}</button>
     </div>
     <div class="col-sm">
