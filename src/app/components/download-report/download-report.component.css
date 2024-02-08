@@ -84,3 +84,41 @@ input {
   border: none;
   border-bottom: 2px solid black;
 }
+
+.submit-button {
+  background: #F05757;
+  border-radius: 5px;
+  width: 150px;
+  height: 40px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #FFFFFF;
+}
+
+.reset-button {
+
+  box-sizing: border-box;
+
+  width: 150px;
+  height: 40px;
+
+  background: #FFFFFF;
+  border: 1px solid #F05757;
+  border-radius: 5px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #F05757;
+}

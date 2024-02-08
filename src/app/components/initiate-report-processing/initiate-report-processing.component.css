@@ -21,4 +21,71 @@ input[type="file"] {
   display: inline-block;
   content: "Choose File";
   padding: 3px;
+
+  background: #FEF0E1;
+  border: 1px dashed #FF7347;
+  border-radius: 3px;
+}
+
+.submit-button {
+  background: #F05757;
+  border-radius: 5px;
+  width: 150px;
+  height: 40px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #FFFFFF;
+}
+
+.reset-button {
+
+  box-sizing: border-box;
+
+  width: 150px;
+  height: 40px;
+
+  background: #FFFFFF;
+  border: 1px solid #F05757;
+  border-radius: 5px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #F05757;
+}
+
+.right-column {
+  padding-left: 75px;
+}
+
+.first {
+  margin-left: 0;
+  width: 832px;
+  height: 3px;
+  background: #F05757;
+  border-radius: 0px 4px 4px 0px;
+  padding: 0px;
+}
+
+.second {
+  margin-right: 0;
+  width: 832px;
+  height: 3px;
+  background: #FF9447;
+  border-radius: 0px 4px 4px 0px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  padding: 0px;
 }
