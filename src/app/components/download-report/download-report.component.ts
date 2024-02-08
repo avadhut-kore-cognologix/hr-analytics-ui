@@ -43,7 +43,6 @@ export class DownloadReportComponent implements OnInit {
   }
 
   getReport(): void {
-    this.downloaded = true;
     this.downloadService.downloadReport(this.downloadForm).subscribe({
       next: (res) => {
         this.data = res;

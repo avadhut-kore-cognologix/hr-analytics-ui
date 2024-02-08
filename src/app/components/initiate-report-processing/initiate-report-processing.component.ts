@@ -59,10 +59,9 @@ export class InitiateReportProcessingComponent {
 
           setTimeout(() => {
             console.log("Delayed for 30 second.");
+            this.router.navigate(['/download-report', res.body.requestId]);
+            this.closeLoadingModal();
           }, 30000);
-
-          this.router.navigate(['/download-report', res.body.requestId]);
-          this.closeLoadingModal();
         }
       },
       error: (e) => {
