@@ -54,3 +54,33 @@
     background: #FFF2EE;
     border-radius: 50%;
 }
+
+.upper {
+    margin-left: 0;
+    margin-bottom: 0;
+    width: 832px;
+    height: 1px;
+    background: #F05757;
+    border-radius: 0px 4px 4px 0px;
+    padding: 0px;
+}
+
+.middle {
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 2px;
+    padding: 0px;
+    background: #FFFFFF;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.lower {
+    margin-right: 0;
+    margin-top: 0;
+    width: 832px;
+    height: 1px;
+    background: #FF9447;
+    border-radius: 0px 4px 4px 0px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    padding: 0px;
+}

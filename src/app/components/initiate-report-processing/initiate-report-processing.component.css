@@ -10,9 +10,9 @@ input {
 }
 
 #period {
-  background: rgba(240, 87, 87, 0.1);
-  border: 1px solid #F05757;
+  background: #FFF2EE;
   padding: 5px;
+  padding-bottom: 10px;
 }
 
 input[type="file"] {
@@ -20,9 +20,9 @@ input[type="file"] {
   border-style: dashed;
   display: inline-block;
   content: "Choose File";
-  padding: 3px;
+  padding: 8px;
 
-  background: #FEF0E1;
+  background: #FFF2EE;
   border: 1px dashed #FF7347;
   border-radius: 3px;
 }
@@ -30,6 +30,7 @@ input[type="file"] {
 .submit-button {
   background: #F05757;
   border-radius: 5px;
+  border: 1px solid #F05757;
   width: 150px;
   height: 40px;
   font-family: 'Montserrat';
@@ -71,23 +72,20 @@ input[type="file"] {
   padding-left: 75px;
 }
 
-.first {
-  margin-left: 0;
-  margin-bottom: 0.2;
-  width: 832px;
-  height: 1px;
-  background: #F05757;
-  border-radius: 0px 4px 4px 0px;
-  padding: 0px;
+:host /deep/ .mdc-label {
+  padding-top: 10px !important;
 }
 
-.second {
-  margin-right: 0;
-  margin-top: 0;
-  width: 832px;
-  height: 1px;
-  background: #FF9447;
-  border-radius: 0px 4px 4px 0px;
-  transform: matrix(-1, 0, 0, 1, 0, 0);
-  padding: 0px;
+:host /deep/ .mat-icon {
+  padding-top: 5px !important;
+}
+
+.form-group {
+  margin-left: 40px;
+  width: 465px;
+}
+
+.mandatory {
+  margin-left: 5px;
+  color: red;
 }

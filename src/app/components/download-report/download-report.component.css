@@ -88,6 +88,7 @@ input {
 .submit-button {
   background: #F05757;
   border-radius: 5px;
+  border: 1px solid #F05757;
   width: 150px;
   height: 40px;
   font-family: 'Montserrat';
@@ -121,4 +122,9 @@ input {
   text-transform: uppercase;
 
   color: #F05757;
+}
+
+.mandatory {
+  margin-left: 5px;
+  color: red;
 }
