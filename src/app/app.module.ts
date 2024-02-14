@@ -17,6 +17,7 @@ import { DownloadReportComponent } from './components/download-report/download-r
 import { InitiateReportProcessingComponent } from './components/initiate-report-processing/initiate-report-processing.component';
 import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
 import { DownloadGmailFileComponent } from './components/download-gmail-file/download-gmail-file.component';
+import { UnknownErrorPageComponent } from './components/unknown-error-page/unknown-error-page.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DownloadGmailFileComponent } from './components/download-gmail-file/dow
     DownloadReportComponent,
     InitiateReportProcessingComponent,
     LoadingModalComponent,
-    DownloadGmailFileComponent
+    DownloadGmailFileComponent,
+    UnknownErrorPageComponent
   ],
   imports: [
     BrowserModule,

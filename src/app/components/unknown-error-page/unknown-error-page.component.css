@@ -1,0 +1,56 @@
+.main-image {
+    margin: auto;
+    width: 373px;
+    height: 333px;
+
+    background: url(../../../assets/images/main-image.svg);
+}
+
+.heading {
+    margin: auto;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 37px;
+    /* identical to box height */
+    text-align: center;
+
+    color: #000000;
+}
+
+.description {
+    margin: auto;
+    width: 383px;
+    height: 48px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    /* or 160% */
+    text-align: center;
+
+    color: #606060;
+}
+
+.button-container {
+    margin: auto;
+    width: 155px;
+    height: 58px;
+}
+
+.back-button {
+    width: 155px;
+    height: 58px;
+
+    background: #F05757;
+    border-color: #F05757;
+    border-radius: 8px;
+    color: #FFFFFF;
+}
+
+:host /deep/ .mat-icon {
+    padding-top: 6px !important;
+    padding-right: 5px !important;
+}
