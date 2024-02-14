@@ -70,6 +70,7 @@ export class InitiateReportProcessingComponent {
         alert(errorMessage);
         console.error(e);
         this.closeLoadingModal();
+        this.router.navigate(['server-error']);
       }
     });
   }
