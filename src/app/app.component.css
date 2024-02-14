@@ -29,6 +29,7 @@
 
 .mt-3 {
     box-shadow: 5px 5px 5px 5px lightgray;
+    position: relative;
 }
 
 .app-title {
@@ -40,4 +41,14 @@
     text-align: center;
 
     color: #000000;
+}
+
+.background-circle {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    left: 103px;
+    top: 99px;
+    background: #FFF2EE;
+    border-radius: 50%;
 }

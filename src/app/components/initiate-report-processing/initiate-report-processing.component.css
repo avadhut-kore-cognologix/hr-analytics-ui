@@ -73,8 +73,9 @@ input[type="file"] {
 
 .first {
   margin-left: 0;
+  margin-bottom: 0.2;
   width: 832px;
-  height: 3px;
+  height: 1px;
   background: #F05757;
   border-radius: 0px 4px 4px 0px;
   padding: 0px;
@@ -82,8 +83,9 @@ input[type="file"] {
 
 .second {
   margin-right: 0;
+  margin-top: 0;
   width: 832px;
-  height: 3px;
+  height: 1px;
   background: #FF9447;
   border-radius: 0px 4px 4px 0px;
   transform: matrix(-1, 0, 0, 1, 0, 0);
