@@ -55,11 +55,11 @@ export class InitiateReportProcessingComponent {
     this.openLoadingModal();
     this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
       next: (res) => {
-        if (res?.body?.requestId) {
+        if (res?.body?.request_id) {
 
           setTimeout(() => {
             console.log("Delayed for 30 second.");
-            this.router.navigate(['/download-report', res.body.requestId]);
+            this.router.navigate(['/download-report', res.body.request_id]);
             this.closeLoadingModal();
           }, 30000);
         }
