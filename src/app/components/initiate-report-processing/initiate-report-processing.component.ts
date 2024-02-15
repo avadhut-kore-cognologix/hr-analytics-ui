@@ -13,6 +13,11 @@ import { SharedService } from '../../services/shared.service';
 export class InitiateReportProcessingComponent {
   currentFile?: File;
   showDateSelection: boolean = true;
+  gmailAvailabilityFileNotUploaded = false;
+  zohoLeavesFileNotUploaded = false;
+  datesNotSelected = false;
+  monthAndYearNotSelected = false;
+
   downloadForm: InitiateReportProcessingRequest = {
     userType: undefined,
     corporateEmail: undefined,
@@ -50,11 +55,38 @@ export class InitiateReportProcessingComponent {
   constructor(public dialog: MatDialog, private router: Router, private sharedService: SharedService) { }
 
   initiateReportProcessing(): void {
+
+    if (!this.downloadForm.gmailAvailabilityMessagesFile) {
+      this.gmailAvailabilityFileNotUploaded = true;
+      return;
+    }
+
+    if (!this.downloadForm.zohoLeavesFile) {
+      this.zohoLeavesFileNotUploaded = true;
+      return;
+    }
+
+    if (this.downloadForm.rangeType === 'by_date') {
+      if (!this.downloadForm.startDate || !this.downloadForm.endDate) {
+        this.datesNotSelected = true;
+        return;
+      }
+    }
+
+    if (this.downloadForm.rangeType !== 'by_date') {
+      if (!this.downloadForm.month || !this.downloadForm.year) {
+        this.monthAndYearNotSelected = true;
+        return;
+      }
+    }
+
     this.sharedService.setDownloadRequest(this.downloadForm);
     this.router.navigate(['/download-report']);
   }
 
   setDates(): void {
+    this.datesNotSelected = false;
+    this.monthAndYearNotSelected = false;
     this.showDateSelection = this.downloadForm.rangeType === 'by_date';
 
     if (this.showDateSelection) {
@@ -71,11 +103,16 @@ export class InitiateReportProcessingComponent {
       endDate: '',
       gmailAvailabilityMessagesFile: undefined
     };
+    this.gmailAvailabilityFileNotUploaded = false;
+    this.zohoLeavesFileNotUploaded = false;
+    this.datesNotSelected = false;
+    this.monthAndYearNotSelected = false;
   }
 
   selectGmailAvailabilityMessagesFile(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
       this.downloadForm.gmailAvailabilityMessagesFile = event.target.files[0] as File;
+      this.gmailAvailabilityFileNotUploaded = false;
     }
   }
 
@@ -85,6 +122,7 @@ export class InitiateReportProcessingComponent {
 
   selectZohoLeavesFile(event: any): void {
     this.downloadForm.zohoLeavesFile = event.target.files.item(0);
+    this.zohoLeavesFileNotUploaded = false;
   }
 
   openDownloadGmailFileModal() {

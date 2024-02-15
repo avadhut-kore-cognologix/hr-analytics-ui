@@ -89,3 +89,7 @@ input[type="file"] {
   margin-left: 5px;
   color: red;
 }
+
+.error-message {
+  color: red;
+}

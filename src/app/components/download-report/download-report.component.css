@@ -132,3 +132,7 @@ input {
 .center-spinner {
   top: 35%;
 }
+
+.error-message {
+  color: red;
+}

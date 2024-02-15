@@ -18,9 +18,12 @@ export class DownloadReportComponent implements OnInit {
     requestId: '',
     corporateEmail: ''
   };
+  readyToDownload = false;
+  downloadFailed = false;
   submitted = false;
   downloaded = false;
   downloading = false;
+  requestIdNotAdded = false;
   jsonString: string = '';
   btnCopyTxt = COPY;
   data = {};
@@ -58,10 +61,17 @@ export class DownloadReportComponent implements OnInit {
   }
 
   submitDownloadReportRequest(): void {
+    if (!this.downloadForm.requestId) {
+      this.requestIdNotAdded = true;
+      return;
+    }
     this.submitted = true;
+    this.readyToDownload = true;
   }
 
   getReport(): void {
+    this.downloading = true;
+    this.readyToDownload = false;
     this.downloadService.downloadReport(this.downloadForm).subscribe({
       next: (res) => {
         this.data = res;
@@ -78,8 +88,13 @@ export class DownloadReportComponent implements OnInit {
         saveAs(res.body, fileName);
 
         this.downloaded = true;
+        this.downloading = false;
+        this.readyToDownload = false;
       },
       error: (e) => {
+        this.downloadFailed = true;
+        this.downloading = false;
+        this.readyToDownload = false;
         this.data = e;
         console.error(e);
         alert("Problem while downloading the file.\n" +
@@ -101,10 +116,13 @@ export class DownloadReportComponent implements OnInit {
     this.submitted = false;
     this.downloaded = false;
     this.downloading = false;
+    this.readyToDownload = false;
+    this.downloadFailed = false;
     this.downloadForm = {
       requestId: '',
       corporateEmail: ''
     };
+    this.requestIdNotAdded = false;
   }
 
 }

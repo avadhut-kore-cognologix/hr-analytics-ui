@@ -26,6 +26,8 @@
             <mat-radio-button value="six_months">6 Months</mat-radio-button>
             <mat-radio-button value="one_year">Year</mat-radio-button>
           </mat-radio-group>
+          <div class="error-message" *ngIf="datesNotSelected">Start date and End Date is required.</div>
+          <div class="error-message" *ngIf="monthAndYearNotSelected">Month and Year is required.</div>
         </div>
 
         <div *ngIf="showDateSelection; else showMonthAndYearSelection">
@@ -66,11 +68,13 @@
       <div class="col-6 right-column">
         <div class="row">
           <div class="form-group">
-            <label for="gmailAvailabilityMessagesFile">Gmail Availability Messages</label><span class="mandatory">*</span><br />
+            <label for="gmailAvailabilityMessagesFile">Gmail Availability Messages</label><span
+              class="mandatory">*</span><br />
             <input type="file" (change)="selectGmailAvailabilityMessagesFile($event)" id="gmailAvailabilityMessagesFile"
               required [(ngModel)]="downloadForm.gmailAvailabilityMessagesFile" name="gmailAvailabilityMessagesFile" />
             <button (click)="openDownloadGmailFileModal()" class="btn btn-success"><mat-icon>download</mat-icon>Get
               Data</button>
+            <div class="error-message" *ngIf="gmailAvailabilityFileNotUploaded">Gmail Availability File is required.</div>
           </div>
         </div>
         <br />
@@ -83,6 +87,7 @@
               [(ngModel)]="downloadForm.zohoLeavesFile" name="zohoLeavesFile" />
             <button (click)="openDownloadGmailFileModal()" class="btn btn-success"><mat-icon>download</mat-icon>Get
               Data</button>
+            <div class="error-message" *ngIf="zohoLeavesFileNotUploaded">Zoho Leaves File is required.</div>
           </div>
         </div>
         <br />
