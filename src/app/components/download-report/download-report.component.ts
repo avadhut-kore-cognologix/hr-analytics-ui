@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { DownloadRequest } from '../../models/download-request.model';
 import { DownloadService } from '../../services/download.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
 import saveAs from 'file-saver';
-import { ActivatedRoute, Params } from '@angular/router';
+import { SharedService } from '../../services/shared.service';
 
 export const COPY = 'Copy';
 export const COPIED = 'Copied';
@@ -22,24 +20,45 @@ export class DownloadReportComponent implements OnInit {
   };
   submitted = false;
   downloaded = false;
-  dialogRef?: MatDialogRef<LoadingModalComponent>;
+  downloading = false;
   jsonString: string = '';
   btnCopyTxt = COPY;
   data = {};
 
-  constructor(private downloadService: DownloadService, public dialog: MatDialog, private route: ActivatedRoute,
-    private clipboard: Clipboard) { }
+  constructor(private downloadService: DownloadService, private clipboard: Clipboard, private sharedService: SharedService) { }
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      if (params['requestId']) {
-        this.downloadForm.requestId = params['requestId'];
-        this.submitted = true;
-      }
-    });
+
+    var request = this.sharedService.getDownloadRequest();
+
+    if (request) {
+      this.sharedService.setDownloadRequest(undefined);
+      this.downloading = true;
+      this.submitted = true;
+      this.downloadService.initiateReportProcessing(request).subscribe({
+        next: (res) => {
+          if (res?.body?.request_id) {
+            this.downloadForm.requestId = res.body.request_id;
+            this.data = res.body;
+            setTimeout(() => {
+              console.log("Delayed for 30 second.");
+              this.downloading = false;
+            }, 30000);
+          }
+        },
+        error: (e) => {
+          var errorMessage = '';
+          errorMessage = e?.message ?? 'Error Occured';
+          alert(errorMessage);
+          this.data = e;
+          console.error(e);
+          this.downloading = false;
+        }
+      });
+    }
   }
 
   submitDownloadReportRequest(): void {
-    this.openDialog();
+    this.submitted = true;
   }
 
   getReport(): void {
@@ -69,20 +88,6 @@ export class DownloadReportComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    const timeout = 3000;
-    const dialogRef = this.dialog.open(LoadingModalComponent);
-    dialogRef.afterOpened().subscribe(_ => {
-      setTimeout(() => {
-         dialogRef.close();
-         this.submitted = true;
-
-         this.jsonString = JSON.stringify(this.data, null, 2);
-
-      }, timeout)
-    })
-  }
-
   copyToClipboard() {
     this.clipboard.copy(JSON.stringify(this.data));
     this.btnCopyTxt = COPIED;
@@ -95,6 +100,7 @@ export class DownloadReportComponent implements OnInit {
   reset(): void {
     this.submitted = false;
     this.downloaded = false;
+    this.downloading = false;
     this.downloadForm = {
       requestId: '',
       corporateEmail: ''

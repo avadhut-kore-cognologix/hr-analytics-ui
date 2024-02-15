@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { DownloadService } from '../../services/download.service';
 import { InitiateReportProcessingRequest } from '../../models/initiate-report-processing-request.model';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DownloadGmailFileComponent } from '../download-gmail-file/download-gmail-file.component';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-initiate-report-processing',
@@ -46,33 +45,13 @@ export class InitiateReportProcessingComponent {
     "2025"
   ];
 
-  loadingModalDialogRef?: MatDialogRef<LoadingModalComponent>;
   downloadGmailFileModalDialogRef?: MatDialogRef<DownloadGmailFileComponent>;
 
-  constructor(private downloadService: DownloadService, public dialog: MatDialog, private router: Router) { }
+  constructor(public dialog: MatDialog, private router: Router, private sharedService: SharedService) { }
 
   initiateReportProcessing(): void {
-    this.openLoadingModal();
-    this.downloadService.initiateReportProcessing(this.downloadForm).subscribe({
-      next: (res) => {
-        if (res?.body?.request_id) {
-
-          setTimeout(() => {
-            console.log("Delayed for 30 second.");
-            this.router.navigate(['/download-report', res.body.request_id]);
-            this.closeLoadingModal();
-          }, 30000);
-        }
-      },
-      error: (e) => {
-        var errorMessage = '';
-        errorMessage = e?.message ?? 'Error Occured';
-        alert(errorMessage);
-        console.error(e);
-        this.closeLoadingModal();
-        this.router.navigate(['server-error']);
-      }
-    });
+    this.sharedService.setDownloadRequest(this.downloadForm);
+    this.router.navigate(['/download-report']);
   }
 
   setDates(): void {
@@ -106,16 +85,6 @@ export class InitiateReportProcessingComponent {
 
   selectZohoLeavesFile(event: any): void {
     this.downloadForm.zohoLeavesFile = event.target.files.item(0);
-  }
-
-  openLoadingModal() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    this.loadingModalDialogRef = this.dialog.open(LoadingModalComponent, dialogConfig);
-  }
-
-  closeLoadingModal() {
-    this.loadingModalDialogRef?.close();
   }
 
   openDownloadGmailFileModal() {

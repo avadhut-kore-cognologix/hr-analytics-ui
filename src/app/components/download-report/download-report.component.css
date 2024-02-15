@@ -128,3 +128,7 @@ input {
   margin-left: 5px;
   color: red;
 }
+
+.center-spinner {
+  top: 35%;
+}

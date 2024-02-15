@@ -15,17 +15,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DownloadReportComponent } from './components/download-report/download-report.component';
 import { InitiateReportProcessingComponent } from './components/initiate-report-processing/initiate-report-processing.component';
-import { LoadingModalComponent } from './components/loading-modal/loading-modal.component';
 import { DownloadGmailFileComponent } from './components/download-gmail-file/download-gmail-file.component';
 import { UnknownErrorPageComponent } from './components/unknown-error-page/unknown-error-page.component';
 import { ServerErrorPageComponent } from './components/server-error-page/server-error-page.component';
+import { SharedService } from './services/shared.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DownloadReportComponent,
     InitiateReportProcessingComponent,
-    LoadingModalComponent,
     DownloadGmailFileComponent,
     UnknownErrorPageComponent,
     ServerErrorPageComponent
@@ -43,7 +42,7 @@ import { ServerErrorPageComponent } from './components/server-error-page/server-
     MatSelectModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

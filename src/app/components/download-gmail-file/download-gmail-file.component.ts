@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DownloadGmailFile } from '../../models/download-gmail-file.model';
 import { DownloadService } from '../../services/download.service';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { LoadingModalComponent } from '../loading-modal/loading-modal.component';
 import saveAs from 'file-saver';
 
 @Component({
@@ -15,7 +13,7 @@ export class DownloadGmailFileComponent implements OnInit {
     username: '',
     password: ''
   };
-  dialogRef?: MatDialogRef<LoadingModalComponent>;
+  
   period?: string;
   startDate?: string;
   endDate?: string;
@@ -46,7 +44,7 @@ export class DownloadGmailFileComponent implements OnInit {
     "2025"
   ];
 
-  constructor(private downloadService: DownloadService, public dialog: MatDialog) { }
+  constructor(private downloadService: DownloadService) { }
   ngOnInit(): void {
   }
 
@@ -73,25 +71,12 @@ export class DownloadGmailFileComponent implements OnInit {
         }
 
         saveAs(res.body, fileName);
-
-        this.closeDialog();
       },
       error: (e) => {
         console.error(e);
         alert("Problem while downloading the file.\n" +
           "[" + e.status + "] " + e.statusText);
-        this.closeDialog();
       }
     });
-  }
-
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    this.dialogRef = this.dialog.open(LoadingModalComponent, dialogConfig);
-  }
-
-  closeDialog() {
-    this.dialogRef?.close();
   }
 }
