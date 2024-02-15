@@ -45,6 +45,7 @@ export class DownloadReportComponent implements OnInit {
             setTimeout(() => {
               console.log("Delayed for 30 second.");
               this.downloading = false;
+              this.readyToDownload = true;
             }, 30000);
           }
         },
@@ -55,6 +56,7 @@ export class DownloadReportComponent implements OnInit {
           this.data = e;
           console.error(e);
           this.downloading = false;
+          this.downloadFailed = true;
         }
       });
     }
