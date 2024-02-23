@@ -57,7 +57,7 @@ export class InitiateReportProcessingComponent {
 
   initiateReportProcessing(): void {
 
-    this.corporateEmailNotProvided = false;
+    this.resetErrorMessages();
 
     if (!this.downloadForm.corporateEmail) {
       this.corporateEmailNotProvided = true;
@@ -112,12 +112,17 @@ export class InitiateReportProcessingComponent {
       gmailAvailabilityMessagesFile: undefined,
       rangeType: 'by_date'
     };
+
+    this.resetErrorMessages();
+    this.setDates();
+  }
+
+  resetErrorMessages() {
     this.gmailAvailabilityFileNotUploaded = false;
     this.zohoLeavesFileNotUploaded = false;
     this.datesNotSelected = false;
     this.monthAndYearNotSelected = false;
     this.corporateEmailNotProvided = false;
-    this.setDates();
   }
 
   selectGmailAvailabilityMessagesFile(event: any): void {
