@@ -17,9 +17,10 @@ export class InitiateReportProcessingComponent {
   zohoLeavesFileNotUploaded = false;
   datesNotSelected = false;
   monthAndYearNotSelected = false;
+  corporateEmailNotProvided = false;
 
   downloadForm: InitiateReportProcessingRequest = {
-    userType: undefined,
+    userType: 'hr',
     corporateEmail: undefined,
     startDate: undefined,
     endDate: undefined,
@@ -56,13 +57,10 @@ export class InitiateReportProcessingComponent {
 
   initiateReportProcessing(): void {
 
-    if (!this.downloadForm.gmailAvailabilityMessagesFile) {
-      this.gmailAvailabilityFileNotUploaded = true;
-      return;
-    }
+    this.corporateEmailNotProvided = false;
 
-    if (!this.downloadForm.zohoLeavesFile) {
-      this.zohoLeavesFileNotUploaded = true;
+    if (!this.downloadForm.corporateEmail) {
+      this.corporateEmailNotProvided = true;
       return;
     }
 
@@ -78,6 +76,16 @@ export class InitiateReportProcessingComponent {
         this.monthAndYearNotSelected = true;
         return;
       }
+    }
+
+    if (!this.downloadForm.gmailAvailabilityMessagesFile) {
+      this.gmailAvailabilityFileNotUploaded = true;
+      return;
+    }
+
+    if (!this.downloadForm.zohoLeavesFile) {
+      this.zohoLeavesFileNotUploaded = true;
+      return;
     }
 
     this.sharedService.setDownloadRequest(this.downloadForm);
@@ -97,16 +105,19 @@ export class InitiateReportProcessingComponent {
 
   reset(): void {
     this.downloadForm = {
-      userType: '',
+      userType: 'hr',
       corporateEmail: '',
       startDate: '',
       endDate: '',
-      gmailAvailabilityMessagesFile: undefined
+      gmailAvailabilityMessagesFile: undefined,
+      rangeType: 'by_date'
     };
     this.gmailAvailabilityFileNotUploaded = false;
     this.zohoLeavesFileNotUploaded = false;
     this.datesNotSelected = false;
     this.monthAndYearNotSelected = false;
+    this.corporateEmailNotProvided = false;
+    this.setDates();
   }
 
   selectGmailAvailabilityMessagesFile(event: any): void {

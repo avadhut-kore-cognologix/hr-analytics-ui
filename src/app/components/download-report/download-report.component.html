@@ -29,7 +29,7 @@
   </div>
   } @else {
   <div class="download-form row">
-    <div class="col-sm">
+    <div class="col-sm" *ngIf="!downloaded">
       <pre id="json-box">{{data | json}}</pre>
       <button class="copy-button" (click)="copyToClipboard()">{{ btnCopyTxt }}</button>
     </div>
@@ -61,6 +61,7 @@
           <div class="center">
             <p class="download-failed-message">Failed to download File</p>
           </div>
+          <button class="center retry-button btn btn-success" (click)="getReport()">Retry</button>
           }
         @if (readyToDownload) {
         <div class="center">

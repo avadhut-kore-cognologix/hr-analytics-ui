@@ -12,9 +12,10 @@
         </div>
 
         <div class="form-group">
-          <label for="corporateEmail">Corporate Email</label>
+          <label for="corporateEmail">Corporate Email</label><span class="mandatory">*</span>
           <input type="text" class="form-control" id="corporateEmail" required [(ngModel)]="downloadForm.corporateEmail"
             name="corporateEmail" />
+          <div class="error-message" *ngIf="corporateEmailNotProvided">Corporate Email is required.</div>
         </div>
 
         <div class="form-group">
@@ -74,7 +75,8 @@
               required [(ngModel)]="downloadForm.gmailAvailabilityMessagesFile" name="gmailAvailabilityMessagesFile" />
             <button (click)="openDownloadGmailFileModal()" class="btn btn-success"><mat-icon>download</mat-icon>Get
               Data</button>
-            <div class="error-message" *ngIf="gmailAvailabilityFileNotUploaded">Gmail Availability File is required.</div>
+            <div class="error-message" *ngIf="gmailAvailabilityFileNotUploaded">Gmail Availability File is required.
+            </div>
           </div>
         </div>
         <br />

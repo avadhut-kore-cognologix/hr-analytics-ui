@@ -136,3 +136,7 @@ input {
 .error-message {
   color: red;
 }
+
+.retry-button {
+  margin-top: 40px;
+}
